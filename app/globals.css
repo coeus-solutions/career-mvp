@@ -1,8 +1,25 @@
 @import "tailwindcss";
 
+/* CASEY Design System - Based on Figma Screens */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+
+  /* CASEY Brand Colors - Blue Theme */
+  --color-primary: #4169E1; /* Main CASEY Blue */
+  --color-primary-dark: #3051B8;
+  --color-primary-light: #6B8CFF;
+  --color-secondary: #E6E9FF; /* Light blue for backgrounds */
+  --color-accent: #B8C5FF; /* Mid blue for gradients */
+  --color-surface: #FFFFFF;
+  --color-muted: #6B7280;
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  --elevation-1: 0 10px 25px rgba(17, 24, 39, 0.06);
+  --elevation-2: 0 20px 40px rgba(17, 24, 39, 0.08);
 }
 
 @theme inline {
@@ -14,13 +31,102 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0A0F1C;
+    --foreground: #E5E7EB;
+    --color-surface: #0F172A;
+    --color-muted: #9CA3AF;
+    --elevation-1: 0 10px 25px rgba(0, 0, 0, 0.35);
+    --elevation-2: 0 20px 40px rgba(0, 0, 0, 0.45);
   }
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(180deg, #E6E9FF 0%, #FFFFFF 40%),
+              var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
+
+/* Subtle entrance animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* CASEY Brand Helpers */
+.brand-gradient-primary {
+  background: var(--color-primary);
+}
+
+.brand-gradient-accent {
+  background: var(--color-primary-dark);
+}
+
+.casey-gradient-bg {
+  background: linear-gradient(180deg, #E6E9FF 0%, #B8C5FF 50%, #7B93FF 100%);
+}
+
+.casey-button {
+  background: #4169E1;
+  color: white;
+  border-radius: 9999px;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.casey-button:hover {
+  background: #3051B8;
+  transform: scale(1.02);
+}
+
+.casey-button:active {
+  transform: scale(0.98);
+}
+
+.glass-surface {
+  background: color-mix(in oklab, var(--color-surface) 80%, transparent);
+  backdrop-filter: saturate(140%) blur(8px);
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+}
+
+.elevation-1 { box-shadow: var(--elevation-1); }
+.elevation-2 { box-shadow: var(--elevation-2); }
